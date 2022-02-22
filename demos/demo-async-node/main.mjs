@@ -1,11 +1,65 @@
+// BUG sous windows 10/Eslint : ne trouve pas les modules standard en node: ou /promises, mais IntelliType oui...
+/* eslint "node/no-missing-import": "off"*/
+/* eslint "import/no-unresolved": "off",*/
+
 import dotenv from "dotenv";
 // version Promises de setTimeout, celle par défaut étant en callback
 import { setTimeout } from "node:timers/promises";
 import { randomInt } from "node:crypto";
-
 // exemple d'accès aux variables d'environnement via dotenv
 dotenv.config({ debug: true });
-console.log(`version = ${process.env.VERSION}`);
+
+// node pino.mjs | npx pino-pretty
+
+import pino from "pino";
+
+// https://github.com/pinojs/pino/blob/master/docs/transports.md
+// const transport = pino.transport({
+//     target: 'pino-pretty',
+//     options: { destination: 1 } // use 2 for stderr
+//   })
+
+const transport = pino.transport({
+  targets: [
+    {
+      level: "debug",
+      target: "pino-pretty", // must be installed separately
+    },
+    {
+      level: "info",
+      target: "pino/file",
+      options: { destination: "log/pino-info.log", mkdir: true, sync: false },
+    },
+    {
+      level: "error",
+      target: "pino/file",
+      options: { destination: "log/pino-error.log", mkdir: true, sync: false },
+    },
+  ],
+});
+
+const logger = pino(
+  {
+    name: "myLogger",
+    level: "debug", // mini global de toutes les targets des transports
+    redact: ["secret", "*.secret"],
+  },
+  transport,
+);
+
+// test du logging pino
+logger.trace("verbose trace");
+logger.debug("a debug info");
+logger.info("an information");
+logger.warn("a warning");
+logger.error("an error, critical");
+logger.fatal("you DIE");
+
+logger.info(`BOT_ID = ${process.env.BOT_ID}`);
+logger.info(`NODE_ENV = ${process.env.NODE_ENV}`);
+logger.info(`version = ${process.version}`);
+
+logger.debug({ key: 123_456, value: "/tmp", secret: "correcthorsebatterystaple" });
 
 // exemple crypt/génération de nombres
 // https://nodejs.org/api/all.html#all_crypto_cryptorandomintmin-max-callback
