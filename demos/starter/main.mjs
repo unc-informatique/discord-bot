@@ -1,24 +1,20 @@
-// BUG sous windows 10/Eslint : ne trouve pas les modules standard en node: ou /promises, mais IntelliType oui...
+// BUG sous Windows 10 de ROmulusFR, ESLint ne trouve pas les modules standard en node: ou /promises, mais IntelliType oui...
 /* eslint "node/no-missing-import": "off"*/
 /* eslint "import/no-unresolved": "off",*/
 
-import dotenv from "dotenv";
 // version Promises de setTimeout, celle par défaut étant en callback
 import { setTimeout } from "node:timers/promises";
 import { randomInt } from "node:crypto";
-// exemple d'accès aux variables d'environnement via dotenv
+
+// accès aux variables d'environnement via dotenv
+import dotenv from "dotenv";
 dotenv.config({ debug: true });
 
-// node pino.mjs | npx pino-pretty
-
+// logging
 import pino from "pino";
 
+// configuration des sorties
 // https://github.com/pinojs/pino/blob/master/docs/transports.md
-// const transport = pino.transport({
-//     target: 'pino-pretty',
-//     options: { destination: 1 } // use 2 for stderr
-//   })
-
 const transport = pino.transport({
   targets: [
     {
@@ -38,11 +34,12 @@ const transport = pino.transport({
   ],
 });
 
+// le
 const logger = pino(
   {
-    name: "myLogger",
+    name: "starter",
     level: "debug", // mini global de toutes les targets des transports
-    redact: ["secret", "*.secret"],
+    redact: ["secret", "*.secret"], // propriétés des objets qui sont caviardées
   },
   transport,
 );
@@ -55,10 +52,12 @@ logger.warn("a warning");
 logger.error("an error, critical");
 logger.fatal("you DIE");
 
+// info
 logger.info(`BOT_ID = ${process.env.BOT_ID}`);
 logger.info(`NODE_ENV = ${process.env.NODE_ENV}`);
-logger.info(`version = ${process.version}`);
+logger.info(`Node version = ${process.version}`);
 
+// affichage caviardé
 logger.debug({ key: 123_456, value: "/tmp", secret: "correcthorsebatterystaple" });
 
 // exemple crypt/génération de nombres
@@ -71,7 +70,7 @@ randomInt(3, (error, n) => {
 
 const DELAY = 250; // en ms
 
-// Exmeple de fonction génératrice (function*) asynchrone (async) : un range() python async
+// Exemple de fonction génératrice (function*) asynchrone (async) : un range() python async
 // https://javascript.info/async-iterators-generators#async-generators-finally
 async function* generateSequence(start, end) {
   let result;
