@@ -28,7 +28,7 @@ On reprend les fonctionnalités du `ClassBot` de ThePhoenix78 sur le DD des étu
   - Node.js 16+
   - ES2019+ <https://node.green/>
 - qualité
-  - <https://www.conventionalcommits.org/>
+  - <https://www.conventionalcommits.org/> ou <https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716>
   - <https://eslint.org/> _strict_
   - <https://prettier.io/>
   - tests automatisés
