@@ -57,3 +57,7 @@ Principaux choix (coché quand déterminé) :
   - [X] logging <https://github.com/pinojs/pino>
   - [X] environnement `dotenv` <https://github.com/motdotla/dotenv>
   - [ ] déploiement <https://pm2.keymetrics.io/>
+- _database_
+  - sqlite3 / better-sqlite3 (sync)
+  - postgres ?
+  - Knex ou sequelize ?

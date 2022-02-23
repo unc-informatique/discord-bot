@@ -1,4 +1,7 @@
 /*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
+/* eslint "node/no-missing-import": "off"*/
+/* eslint "import/no-unresolved": "off",*/
+
 import process from "node:process";
 import { setInterval } from "node:timers/promises";
 import { monitorEventLoopDelay } from "node:perf_hooks";
