@@ -71,34 +71,38 @@ client.on("error", (error) => {
  */
 async function commandHandler(interaction) {
   if (!interaction.isCommand()) return;
-
   const { commandName } = interaction;
-  switch (commandName) {
-    case "ping": {
-      const {
-        user: { tag, id },
-      } = interaction;
-      logger.info(`Ping from ${tag} (id=${id})`);
-      await interaction.reply("Pong!");
-      break;
+
+  try {
+    switch (commandName) {
+      case "ping": {
+        const {
+          user: { tag, id },
+        } = interaction;
+        logger.info(`Ping from ${tag} (id=${id})`);
+        await interaction.reply("Pong!");
+        break;
+      }
+      case "server": {
+        const {
+          guild: { name, memberCount },
+        } = interaction;
+        await interaction.reply(`Server name: ${name}\nTotal members: ${memberCount}`);
+        break;
+      }
+      case "user": {
+        const {
+          user: { tag, id },
+        } = interaction;
+        await interaction.reply(`Your tag: ${tag}\nYour id: ${id}`);
+        break;
+      }
+      default: {
+        logger.warn(`received unknown command ${commandName}`);
+      }
     }
-    case "server": {
-      const {
-        guild: { name, memberCount },
-      } = interaction;
-      await interaction.reply(`Server name: ${name}\nTotal members: ${memberCount}`);
-      break;
-    }
-    case "user": {
-      const {
-        user: { tag, id },
-      } = interaction;
-      await interaction.reply(`Your tag: ${tag}\nYour id: ${id}`);
-      break;
-    }
-    default: {
-      logger.warn(`received unknown command ${commandName}`);
-    }
+  } catch (error) {
+    logger.error(error, `Command handling error (${error.message})`);
   }
 }
 
