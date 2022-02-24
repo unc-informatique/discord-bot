@@ -17,12 +17,16 @@
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
+    "bufferutil": "^4.0.6",
     "cross-env": "^7.0.3",
     "discord-api-types": "^0.27.2",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
+    "erlpack": "discord/erlpack",
     "pino": "^7.8.0",
-    "pino-pretty": "^7.5.1"
+    "pino-pretty": "^7.5.1",
+    "utf-8-validate": "^5.0.8",
+    "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
     "eslint": "^8.9.0",
