@@ -9,7 +9,8 @@ Projet tuteuré L4 de bot <https://discord.js.org/> pour le serveur Discord de l
 ## TODO
 
 - [ ] trouver un bot discord.js libre et bien écrit mais pas torp compliqué pour s'en inspirer
-- [ ] noter la liste des permissions / code binaire
+- [ ] noter la liste des permissions / code binaire et **garder le lien**
+  - attention il y a _scope OAuth2_ et _permission dans le server_ qui sont différent !
 
 ## Fonctionnalités
 
