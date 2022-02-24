@@ -6,6 +6,11 @@ Projet tuteuré L4 de bot <https://discord.js.org/> pour le serveur Discord de l
 - <https://github.com/xd390>
 - <https://github.com/romulusFR/>
 
+## TODO
+
+- [ ] trouver un bot discord.js libre et bien écrit mais pas torp compliqué pour s'en inspirer
+- [ ] noter la liste des permissions / code binaire
+
 ## Fonctionnalités
 
 On reprend les fonctionnalités du `ClassBot` de ThePhoenix78 sur le DD des étudiants.
