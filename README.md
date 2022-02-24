@@ -53,11 +53,12 @@ Principaux choix (coché quand déterminé) :
   - [ ] conventions JSDoc <https://jsdoc.app/>
 - _production ready_
   - cible VM OVH Ubuntu 21.10. Uniquement les ports _web_ ouverts
-  - [ ] `NODE_ENV=production` _versus_ `NODE_ENV=development`
+  - [X] `NODE_ENV=production` _versus_ `NODE_ENV=development`
   - [X] logging <https://github.com/pinojs/pino>
   - [X] environnement `dotenv` <https://github.com/motdotla/dotenv>
-  - [ ] déploiement <https://pm2.keymetrics.io/>
-- _database_
-  - sqlite3 / better-sqlite3 (sync)
-  - postgres ?
-  - Knex ou sequelize ?
+  - [X] déploiement <https://pm2.keymetrics.io/>
+- [ ] _database_, à voir entre :
+  - sqlite3 <https://github.com/mapbox/node-sqlite3> (async) / better-sqlite3 <https://github.com/JoshuaWise/better-sqlite3> (sync)
+  - postgres <https://node-postgres.com/>
+  - Knex <https://knexjs.org/> (_query builder_) ou Sequelize <https://sequelize.org/> (ORM)
+  - KeyV <https://keyv.js.org/#/> un key-value store qui peut utiliser les précédents en backend.
