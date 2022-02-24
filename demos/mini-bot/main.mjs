@@ -81,9 +81,15 @@ async function commandHandler(interaction) {
       case "ping": {
         const {
           user: { tag, id },
+          createdTimestamp,
         } = interaction;
         logger.info(`Ping from ${tag} (id=${id})`);
-        await interaction.reply("Pong!");
+        const sent = await interaction.reply({
+          content: `Pong! (WS heartbeat ${client.ws.ping}ms)...`,
+          fetchReply: true,
+        });
+        // await interaction.followUp("Pong again!");
+        await interaction.editReply(`${sent} RTT in ${sent.createdTimestamp - createdTimestamp}ms.`);
         break;
       }
       case "server": {
