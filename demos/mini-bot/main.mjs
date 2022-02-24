@@ -12,9 +12,9 @@ import logger from "./logger.mjs";
  * @param  {integer} code=0 - The return code to process.exit()
  */
 function gracefulExitHandler(signal, code = 0) {
-  logger.warn(`Exiting gracefully after ${signal}.`);
-  client.destroy();
-  // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
+  logger.info(`Exiting gracefully after ${signal}.`);
+  if (client && client.isReady()) client.destroy();
+  // eslint-disable-next-line no-process-exit, unicorn/no-process-exit
   process.exit(code);
 }
 
@@ -22,12 +22,12 @@ function gracefulExitHandler(signal, code = 0) {
 // Mind the one used by nodemon to reload (in package.json)
 // https://pm2.keymetrics.io/docs/usage/signals-clean-restart/
 // https://github.com/remy/nodemon
-process.on("SIGINT", () => gracefulExitHandler("SIGINT"));
-process.on("SIGUSR2", () => gracefulExitHandler("SIGUSR2"));
-// Windows n'aime pas ce signal ?
-// process.on("SIGHUP", () => gracefulExitHandler("SIGHUP"));
 
-// synchronous console logging at the very end
+// /!\ Windows 10 don't like SIGHUP signal (and passes always SIGINT)
+const terminationSignals = ["SIGINT", "SIGUSR2"];
+terminationSignals.map((signal) => process.on(signal, () => gracefulExitHandler(signal)));
+
+// (a)synchronous console logging at the very end
 process.on("exit", (code) => {
   logger.warn(`Process (${process.pid}) exit with ${code}`);
 });
