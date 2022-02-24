@@ -1,8 +1,6 @@
-//https://nodejs.org/api/esm.html
-
 import dotenv from "dotenv";
 
-const production = process.env.NODE_ENV.toLowerCase() === "production";
+const production = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === "production";
 
 dotenv.config({ debug: !production });
 
