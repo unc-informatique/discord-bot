@@ -14,18 +14,15 @@ let targets = [
     target: "pino/file",
     options: { destination: "logs/error.log", mkdir: true, sync: false },
   },
-];
-
-if (!production) {
-  targets.push({
-    level: "debug",
+  {
+    level: (production)?"info":"debug",
     target: "pino-pretty",
-  });
-}
+  },
+];
 
 const logger = pino(
   {
-    name: "starter",
+    name: "mini-bot",
     level: production ? "info" : "debug",
   },
   pino.transport({

@@ -7,52 +7,78 @@ import { Client, Intents } from "discord.js";
 import { token } from "./config.mjs";
 import logger from "./logger.mjs";
 
-function gracefulExit(code) {
+/**
+ * @param  {object|string} signal - The software interrupt causing exit
+ * @param  {integer} code=0 - The return code to process.exit()
+ */
+function gracefulExitHandler(signal, code = 0) {
+  logger.warn(`Exiting gracefully after ${signal}.`);
   client.destroy();
   // eslint-disable-next-line no-process-exit,unicorn/no-process-exit
   process.exit(code);
 }
 
-const signalHandler = (signal) => {
-  logger.warn(`Exiting gracefully after ${signal}.`);
-  gracefulExit(0);
-};
-// arrêt normal sur SIGINT (Ctrl-C) etc.
-// dont signal https://github.com/remy/nodemon
-process.on("SIGHUP", signalHandler);
-process.on("SIGINT", signalHandler);
+// gracious stop on SIGINT (Ctrl-C and PM2) and SIGHUP (used by nodemon to reload)
+// https://pm2.keymetrics.io/docs/usage/signals-clean-restart/
+// https://github.com/remy/nodemon
+process.on("SIGINT", () => gracefulExitHandler("SIGINT"));
+process.on("SIGHUP", () => gracefulExitHandler("SIGINT"));
 
-// affichage synchrone de la fin de l'appli
+// synchronous console logging at the very end
 process.on("exit", (code) => {
-  console.info(`Process (${process.pid}) exit with ${code}`);
+  logger.warn(`Process (${process.pid}) exit with ${code}`);
 });
 
-// attrapeur central d'exceptions
+// centralized error handler
 // https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/errorhandling/catchunhandledpromiserejection.md
 process.on("uncaughtException", (error, origin) => {
   logger.fatal(error, `uncaughtException handler from ${origin}`);
-  gracefulExit(1);
+  gracefulExitHandler("uncaughtException", 1);
 });
 
-// https://discordjs.guide/creating-your-bot/#creating-the-main-file
 // Create a new client instance
+// https://discordjs.guide/creating-your-bot/#creating-the-main-file
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 // When the client is ready, run this code (only once)
 client.once("ready", () => {
+  // send a "ready" signal to PM2
+  // https://pm2.keymetrics.io/docs/usage/signals-clean-restart/
+  // https://nodejs.org/api/process.html#processsendmessage-sendhandle-options-callback
+  // If Node.js was not spawned with an IPC channel, process.send will be undefined.
+  if (process.send) {
+    process.send("ready");
+  } else {
+    logger.info(`Running non-child process (no process.send)`);
+  }
   logger.info(`Logged in as ${client.user.tag}!`);
 });
 
+// Log client error, but do not re-raise
 client.on("error", (error) => {
   logger.error(error, `Bot ${client.user.tag} received an error`);
 });
-
-client.on("interactionCreate", async (interaction) => {
+/**
+ * @param  {Interfaction} interaction - When someone uses a guild's command
+ *
+ * See https://discord.js.org/#/docs/discord.js/stable/class/Interaction
+ *
+ * Supported commands :
+ *
+ * - ping: answers pong and log a message
+ * - server: shows some statistics
+ * - user: shows info about the interacting user
+ */
+async function commandHandler(interaction) {
   if (!interaction.isCommand()) return;
 
   const { commandName } = interaction;
   switch (commandName) {
     case "ping": {
+      const {
+        user: { tag, id },
+      } = interaction;
+      logger.info(`Ping from ${tag} (id=${id})`);
       await interaction.reply("Pong!");
       break;
     }
@@ -74,7 +100,10 @@ client.on("interactionCreate", async (interaction) => {
       logger.warn(`received unknown command ${commandName}`);
     }
   }
-});
+}
+
+// Commands handler
+client.on("interactionCreate", commandHandler);
 
 // Login to Discord with your client's token
 client.login(token);
