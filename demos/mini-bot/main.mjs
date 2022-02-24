@@ -18,11 +18,14 @@ function gracefulExitHandler(signal, code = 0) {
   process.exit(code);
 }
 
-// gracious stop on SIGINT (Ctrl-C and PM2) and SIGHUP (used by nodemon to reload)
+// gracious stop on SIGINT (Ctrl-C and PM2) and SIGHUP.
+// Mind the one used by nodemon to reload (in package.json)
 // https://pm2.keymetrics.io/docs/usage/signals-clean-restart/
 // https://github.com/remy/nodemon
 process.on("SIGINT", () => gracefulExitHandler("SIGINT"));
-process.on("SIGHUP", () => gracefulExitHandler("SIGINT"));
+process.on("SIGUSR2", () => gracefulExitHandler("SIGUSR2"));
+// Windows n'aime pas ce signal ?
+// process.on("SIGHUP", () => gracefulExitHandler("SIGHUP"));
 
 // synchronous console logging at the very end
 process.on("exit", (code) => {
