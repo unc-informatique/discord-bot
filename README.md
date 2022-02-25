@@ -36,38 +36,41 @@ Voir le [README.md](demos/starter/README.md) du projet de départ `starter` pour
 Principaux choix (coché quand déterminé) :
 
 - _state of the art_ JavaScript
-  - [X] Node.js 17 <https://nodejs.org/en/>
+  - [x] Node.js 17 <https://nodejs.org/en/>
     - API Promise et `async/await`
-  - [X] ES2021+ <https://node.green/>
-  - [X] Yarn <https://yarnpkg.com/>
+  - [x] ES2021+ <https://node.green/>
+  - [x] Yarn <https://yarnpkg.com/>
 - bonnes pratiques
-  - [X] <https://github.com/goldbergyoni/nodebestpractices>
+  - [x] <https://github.com/goldbergyoni/nodebestpractices>
 - gestion du développement
-  - [X] GitHub <https://github.com/unc-informatique/discord-bot>
-  - [X] Respecter <https://www.conventionalcommits.org/> (voir aussi [cette doc](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716))
+  - [x] GitHub <https://github.com/unc-informatique/discord-bot>
+  - [x] Respecter <https://www.conventionalcommits.org/> (voir aussi [cette doc](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716))
 - _tooling_
-  - [X] <https://code.visualstudio.com/> avec extensions minimales
-  - [X] linting <https://eslint.org/>
-    - [X] configuré _strict_ avec [unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
-    - [X] extension VSCode [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+  - [x] <https://code.visualstudio.com/> avec extensions minimales
+  - [x] linting <https://eslint.org/>
+    - [x] configuré _strict_ avec [unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
+    - [x] extension VSCode [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
     - [ ] style AirBnB <https://airbnb.io/javascript/>
-  - [X] <https://prettier.io/> pour l'auto formatage
-    - [X] extension VSCode [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  - [x] <https://prettier.io/> pour l'auto formatage
+    - [x] extension VSCode [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
   - [ ] tests automatisés (unitaires, intégration, fonctionnels)
     - [ ] <https://jestjs.io/>
     - [ ] <https://cordejs.org/> **Préférence**.
   - [ ] conventions JSDoc <https://jsdoc.app/>
-  - [X] Git hooks ou équivalent
+  - [x] Git hooks ou équivalent
     - voir <https://prettier.io/docs/en/precommit.html> pour Prettier
     - [ ] <https://typicode.github.io/husky/#/>
-    - [X] <https://github.com/okonet/lint-staged>
+    - [x] <https://github.com/okonet/lint-staged>
+      - à installer via `npx mrm lint-staged` à la racine du repo
+      - pour l'instant `husky` seul sur `demos/mini-bot` via `npx husky install demos/mini-bot/.husky`
+      - vérifier le point des hooks avec `git config core.hooksPath`
 - _production ready_
-  - [X] cible VM OVH Ubuntu 21.10.
-  - [X] `NODE_ENV=production` _versus_ `NODE_ENV=development`
-  - [X] logging <https://github.com/pinojs/pino>
-  - [X] environnement `dotenv` <https://github.com/motdotla/dotenv>
-    - extension VSCode  [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
-  - [X] déploiement <https://pm2.keymetrics.io/>
+  - [x] cible VM OVH Ubuntu 21.10.
+  - [x] `NODE_ENV=production` _versus_ `NODE_ENV=development`
+  - [x] logging <https://github.com/pinojs/pino>
+  - [x] environnement `dotenv` <https://github.com/motdotla/dotenv>
+    - extension VSCode [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
+  - [x] déploiement <https://pm2.keymetrics.io/>
 - [ ] _database_, à voir entre :
   - [ ] sqlite3 <https://github.com/mapbox/node-sqlite3> (async) / better-sqlite3 <https://github.com/JoshuaWise/better-sqlite3> (sync)
   - [ ] postgres <https://node-postgres.com/>
