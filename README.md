@@ -44,27 +44,31 @@ Principaux choix (coché quand déterminé) :
   - [X] <https://github.com/goldbergyoni/nodebestpractices>
 - gestion du développement
   - [X] GitHub <https://github.com/unc-informatique/discord-bot>
-  - [ ] respecter <https://www.conventionalcommits.org/> (voir aussi [cette doc](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716))
+  - [X] Respecter <https://www.conventionalcommits.org/> (voir aussi [cette doc](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716))
 - _tooling_
   - [X] <https://code.visualstudio.com/> avec extensions minimales
-    - [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
-    - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-    - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-  - [X] <https://eslint.org/>
-    - configuré _strict_ avec [unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
+  - [X] linting <https://eslint.org/>
+    - [X] configuré _strict_ avec [unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
+    - [X] extension VSCode [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+    - [ ] style AirBnB <https://airbnb.io/javascript/>
   - [X] <https://prettier.io/> pour l'auto formatage
-  - [ ] tests automatisés <https://jestjs.io/>
-    - unitaires
-    - intégration/fonctionnels
+    - [X] extension VSCode [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  - [ ] tests automatisés (unitaires, intégration, fonctionnels)
+    - [ ] <https://jestjs.io/>
+    - [ ] <https://cordejs.org/> **Préférence**.
   - [ ] conventions JSDoc <https://jsdoc.app/>
+  - [ ] Git hooks ou équivalent
+    - voir <https://prettier.io/docs/en/precommit.html>
+    - [ ] <https://typicode.github.io/husky/#/>
 - _production ready_
-  - cible VM OVH Ubuntu 21.10. Uniquement les ports _web_ ouverts
+  - [X] cible VM OVH Ubuntu 21.10.
   - [X] `NODE_ENV=production` _versus_ `NODE_ENV=development`
   - [X] logging <https://github.com/pinojs/pino>
   - [X] environnement `dotenv` <https://github.com/motdotla/dotenv>
+    - extension VSCode  [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
   - [X] déploiement <https://pm2.keymetrics.io/>
 - [ ] _database_, à voir entre :
-  - sqlite3 <https://github.com/mapbox/node-sqlite3> (async) / better-sqlite3 <https://github.com/JoshuaWise/better-sqlite3> (sync)
-  - postgres <https://node-postgres.com/>
-  - Knex <https://knexjs.org/> (_query builder_) ou Sequelize <https://sequelize.org/> (ORM)
-  - KeyV <https://keyv.js.org/#/> un key-value store qui peut utiliser les précédents en backend.
+  - [ ] sqlite3 <https://github.com/mapbox/node-sqlite3> (async) / better-sqlite3 <https://github.com/JoshuaWise/better-sqlite3> (sync)
+  - [ ] postgres <https://node-postgres.com/>
+  - [ ] Knex <https://knexjs.org/> (_query builder_) ou Sequelize <https://sequelize.org/> (ORM)
+  - [ ] KeyV <https://keyv.js.org/#/> un key-value store qui peut utiliser les précédents en backend. **Préférence**.
