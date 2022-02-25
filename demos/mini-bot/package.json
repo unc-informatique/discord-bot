@@ -12,7 +12,9 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development npx nodemon --inspect --signal SIGUSR2 main.mjs",
-    "prod": "cross-env NODE_ENV=production node main.mjs"
+    "prod": "cross-env NODE_ENV=production node main.mjs",
+    "prepare": "cd ../.. && npx husky install demos/mini-bot/.husky",
+    "lint:fix": "eslint --fix *.mjs"
   },
   "dependencies": {
     "@discordjs/builders": "^0.12.0",

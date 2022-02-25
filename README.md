@@ -62,7 +62,8 @@ Principaux choix (coché quand déterminé) :
     - [ ] <https://typicode.github.io/husky/#/>
     - [x] <https://github.com/okonet/lint-staged>
       - à installer via `npx mrm lint-staged` à la racine du repo
-      - pour l'instant `husky` seul sur `demos/mini-bot` via `npx husky install demos/mini-bot/.husky`
+      - pour l'instant `husky` seul sur `demos/mini-bot` via `npx husky install demos/mini-bot/.husky` dans `package.json`
+      - ajout d'un hook `npx husky add .husky/pre-commmit "cd demos/mini-bot; echo $PWD"`
       - vérifier le point des hooks avec `git config core.hooksPath`
 - _production ready_
   - [x] cible VM OVH Ubuntu 21.10.
