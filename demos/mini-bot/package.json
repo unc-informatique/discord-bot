@@ -11,10 +11,9 @@
     "node": ">=16"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development npx nodemon --inspect --signal SIGUSR2 main.mjs",
-    "prod": "cross-env NODE_ENV=production node main.mjs",
-    "prepare": "cd ../.. && npx husky install demos/mini-bot/.husky",
-    "lint:fix": "eslint --fix *.mjs",
+    "start:dev": "cross-env NODE_ENV=development npx nodemon --inspect --signal SIGUSR2 main.mjs",
+    "start:prod": "cross-env NODE_ENV=production node main.mjs",
+    "lint": "eslint *.mjs",
     "format": "prettier --write *.{mjs,md}"
   },
   "dependencies": {
