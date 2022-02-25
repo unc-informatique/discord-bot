@@ -57,9 +57,10 @@ Principaux choix (coché quand déterminé) :
     - [ ] <https://jestjs.io/>
     - [ ] <https://cordejs.org/> **Préférence**.
   - [ ] conventions JSDoc <https://jsdoc.app/>
-  - [ ] Git hooks ou équivalent
-    - voir <https://prettier.io/docs/en/precommit.html>
+  - [X] Git hooks ou équivalent
+    - voir <https://prettier.io/docs/en/precommit.html> pour Prettier
     - [ ] <https://typicode.github.io/husky/#/>
+    - [X] <https://github.com/okonet/lint-staged>
 - _production ready_
   - [X] cible VM OVH Ubuntu 21.10.
   - [X] `NODE_ENV=production` _versus_ `NODE_ENV=development`
