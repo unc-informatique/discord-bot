@@ -13,7 +13,7 @@ module.exports = {
     {
       name: "mini-bot",
       // pb avec yarn : c'est qu'on monitor le process de yarn !
-      script: "main.mjs",
+      script: "src/main.mjs",
       interpreter: "node",
       cwd: ".",
       env: {
@@ -21,7 +21,7 @@ module.exports = {
       },
       instances: 1,
       autorestart: false,
-      watch: ["*.mjs"],
+      watch: ["src/*.mjs"],
       ignore_watch: ["logs/"],
       restart_delay: 1000,
       watch_delay: 1000,

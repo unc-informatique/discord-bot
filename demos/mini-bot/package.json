@@ -2,7 +2,7 @@
   "name": "mini-bot",
   "version": "0.0.1",
   "description": "Bot de test/démo avec discord.js",
-  "main": "main.mjs",
+  "main": "src/main.mjs",
   "repository": "https://github.com/unc-informatique/discord-bot",
   "author": "Romuald THION",
   "license": "MIT",
@@ -11,10 +11,10 @@
     "node": ">=16"
   },
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development npx nodemon --inspect --signal SIGUSR2 main.mjs",
-    "start:prod": "cross-env NODE_ENV=production node main.mjs",
-    "lint": "eslint *.mjs",
-    "format": "prettier --write *.{mjs,md}"
+    "start:dev": "cross-env NODE_ENV=development nodemon --inspect --signal SIGUSR2 src/main.mjs",
+    "start:prod": "cross-env NODE_ENV=production node src/main.mjs",
+    "lint": "eslint **/*.mjs",
+    "format": "prettier --write **/*.{mjs,md}"
   },
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
