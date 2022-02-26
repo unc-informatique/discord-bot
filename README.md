@@ -9,12 +9,19 @@ Projet tuteuré L4 de bot <https://discord.js.org/> pour le serveur Discord de l
 ## TODO
 
 - [ ] trouver un bot discord.js libre et bien écrit mais pas torp compliqué pour s'en inspirer
+  - <https://airhorn.solutions/> <https://github.com/discord/airhornbot>
+  - <https://github.com/bpbuch/discord-role-bot> pas top qualité mais reaction minimaliste
 - [ ] noter la liste des permissions / code binaire et **garder le lien**
   - attention il y a _scope OAuth2_ et _permission dans le server_ qui sont différent !
+- [ ] rétro concevoir le bot Python de <https://github.com/ThePhoenix78>
+- [ ] fixer une liste des fonctionnalités
+- [ ] concenvoir un schéma de BD/KV
+- [ ] migrer projet de départ à la racine
 
 ## Fonctionnalités
 
 On reprend les fonctionnalités du `ClassBot` de ThePhoenix78 sur le DD des étudiants.
+Liste spéculative à valider.
 
 - [ ] message de bienvenue
 - [ ] gestion des rôles
@@ -26,7 +33,8 @@ On reprend les fonctionnalités du `ClassBot` de ThePhoenix78 sur le DD des étu
 - [ ] affichage/téléchargement/lien vers les emplois du temps par promo
   - à voir via le crafting d'url comme dans `ClassBot` ou via le web service UNC d'ics à venir
 - [ ] suppression des vieux messages dans les chans
-  - à voir
+  - à voir...
+- [ ] contacts admin ?
 
 ## Qualité logicielle
 
@@ -54,15 +62,16 @@ Principaux choix (coché quand déterminé) :
   - [x] <https://prettier.io/> pour l'auto formatage
     - [x] extension VSCode [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
   - [ ] tests automatisés (unitaires, intégration, fonctionnels)
-    - [ ] <https://jestjs.io/>
-    - [ ] <https://cordejs.org/> **Préférence**.
-  - [ ] conventions JSDoc <https://jsdoc.app/>
-  - [x] Git hooks ou équivalent
+    - [ ] <https://jestjs.io/> pour l'unitaire
+    - [ ] <https://cordejs.org/> pour le E2E
+  - [ ] JSDoc <https://jsdoc.app/>
+  - [ ] Git Hooks <https://githooks.com/> **TODO à la racine du repo**
     - voir <https://prettier.io/docs/en/precommit.html> pour Prettier
-    - [ ] <https://typicode.github.io/husky/#/>
+    - [x] <https://typicode.github.io/husky/#/> (intégré via lint-staged)
     - [x] <https://github.com/okonet/lint-staged>
-      - à installer via `npx mrm lint-staged` à la racine du repo : migration à la racine
+      - à installer via `npx mrm lint-staged`
       - vérifier le point des hooks avec `git config core.hooksPath`
+    - [ ] <https://commitlint.js.org/>
 - _production ready_
   - [x] cible VM OVH Ubuntu 21.10.
   - [x] `NODE_ENV=production` _versus_ `NODE_ENV=development`
@@ -75,3 +84,4 @@ Principaux choix (coché quand déterminé) :
   - [ ] postgres <https://node-postgres.com/>
   - [ ] Knex <https://knexjs.org/> (_query builder_) ou Sequelize <https://sequelize.org/> (ORM)
   - [ ] KeyV <https://keyv.js.org/#/> un key-value store qui peut utiliser les précédents en backend. **Préférence**.
+  - [ ] ~~MongoBD~~
