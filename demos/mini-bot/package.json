@@ -1,6 +1,6 @@
 {
   "name": "mini-bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Bot de test/démo avec discord.js",
   "main": "src/main.mjs",
   "repository": "https://github.com/unc-informatique/discord-bot",
