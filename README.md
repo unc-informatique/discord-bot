@@ -79,9 +79,12 @@ Principaux choix (coché quand déterminé) :
   - [x] environnement `dotenv` <https://github.com/motdotla/dotenv>
     - extension VSCode [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
   - [x] déploiement <https://pm2.keymetrics.io/>
-- [ ] _database_, à voir entre :
-  - [ ] sqlite3 <https://github.com/mapbox/node-sqlite3> (async) / better-sqlite3 <https://github.com/JoshuaWise/better-sqlite3> (sync)
+- [ ] _database_, à voir selon le besoin entre :
+  - [ ] sqlite3 <https://github.com/mapbox/node-sqlite3> (async) / ~~better-sqlite3 <https://github.com/JoshuaWise/better-sqlite3> (sync)~~
   - [ ] postgres <https://node-postgres.com/>
-  - [ ] Knex <https://knexjs.org/> (_query builder_) ou Sequelize <https://sequelize.org/> (ORM)
-  - [ ] KeyV <https://keyv.js.org/#/> un key-value store qui peut utiliser les précédents en backend. **Préférence**.
+  - [ ] Knex <https://knexjs.org/> (_query builder_)
+  - [ ] Sequelize <https://sequelize.org/> (ORM)
+  - [ ] ~~KeyV <https://keyv.js.org/#/> un key-value store qui peut utiliser les précédents en backend.~~
+    - l'API est cool mais le schéma de persistence est très bof
   - [ ] ~~MongoBD~~
+    - le projet n'est plus FLOSS
