@@ -1,6 +1,8 @@
 # Projet tuteuré de licence info UNC 2022 `discord-bot`
 
-Projet tuteuré L4 de bot <https://discord.js.org/> pour le serveur Discord de la licence informatique UNC en 2022. Réalisé par :
+Projet tuteuré L4 de bot <https://discord.js.org/> pour le serveur Discord de la licence informatique UNC en 2022.
+
+Réalisé par :
 
 - <https://github.com/ThePhoenix78>
 - <https://github.com/xd390>
