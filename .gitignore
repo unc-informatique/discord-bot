@@ -1,6 +1,7 @@
 # ajouts manuels
 backup/
 server/
+legacy/
 
 # base de .gitignore de github pour les projets Node.js
 # Logs
