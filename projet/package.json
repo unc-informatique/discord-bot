@@ -1,0 +1,8 @@
+{
+    "prisma": {
+        "schema": "./prisma/schema.prisma"
+    },
+    "dependencies": {
+        "prisma": "^3.11.1"
+    }
+}

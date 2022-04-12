@@ -4,6 +4,15 @@
 
 La liste des fonctionnalités existentes pertinentes pour le projet.
 
+- Commande permettant la liaison d'une emote d'un message à un role.
+- Attribution de role à un utilisateur.
+- Récupération de l'edt avec convertissement du pdf en image et une mise en cache de l'edt.
+- Envoi d'un edt dans un channel.
+- Vérification d'un nouvel edt.
+- Commande permettant la suppression de N message.
+- Affichage d'un message de bienvenu pour les nouveaux arrivant et de depart pour ceux qui partent du serveur.
+- Vérification du role de l'utilisateur lors de l'utilisation des commandes dans le bot.
+
 #### Commandes
 
 - ajout/suppression d'une emote a un message relié a un role

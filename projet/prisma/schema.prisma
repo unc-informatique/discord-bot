@@ -1,0 +1,59 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Guild {
+  id       Int        @id @unique
+  Channel  Channel[]
+  GuildContainsMention GuildContainsMention[]
+}
+
+model Channel {
+  id      Int       @id
+  guild   Guild     @relation(fields: [guildId], references: [id])
+  guildId Int
+  Message Message[]
+}
+
+model Message {
+  id        Int     @id @unique
+  channel   Channel @relation(fields: [channelId], references: [id])
+  channelId Int
+}
+
+model Mention {
+  discipline String
+  diplome    String     @id
+  Parcours   Parcours[]
+  GuildContainsMention   GuildContainsMention[]
+}
+
+model Parcours {
+  annee     DateTime
+  trec      String
+  role      String   @id @unique
+  mention   Mention  @relation(fields: [mentionId], references: [diplome])
+  mentionId String
+
+  Emoji Emoji[]
+}
+
+model Emoji {
+  code       String   @id @unique
+  nom        String
+  parcours   Parcours @relation(fields: [parcoursId], references: [role])
+  parcoursId String
+}
+
+model GuildContainsMention {
+  guild     Guild   @relation(fields: [guildId], references: [id])
+  guildId   Int
+  mention   Mention @relation(fields: [diplome], references: [diplome])
+  diplome String
+  id        String  @unique
+}
+model Config {
+  cle    String @unique @id
+  valeur String
+}
