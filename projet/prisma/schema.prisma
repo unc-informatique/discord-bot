@@ -3,28 +3,35 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+generator client {
+  provider = "prisma-client-js"
+}
+
 model Guild {
-  id       Int        @id @unique
+  id       Int        @id
   Channel  Channel[]
   GuildContainsMention GuildContainsMention[]
 }
 
 model Channel {
-  id      Int       @id
+  id      Int
   guild   Guild     @relation(fields: [guildId], references: [id])
   guildId Int
+  @@id([id,guildId])
   Message Message[]
 }
 
 model Message {
   id        Int     @id @unique
-  channel   Channel @relation(fields: [channelId], references: [id])
+  channel   Channel @relation(fields: [channelId,guildId], references: [id,guildId])
+  guildId Int
   channelId Int
 }
 
 model Mention {
   discipline String
-  diplome    String     @id
+  diplome    String
+  @@id([discipline,diplome])
   Parcours   Parcours[]
   GuildContainsMention   GuildContainsMention[]
 }
@@ -32,15 +39,17 @@ model Mention {
 model Parcours {
   annee     DateTime
   trec      String
-  role      String   @id @unique
-  mention   Mention  @relation(fields: [mentionId], references: [diplome])
-  mentionId String
-
+  role      String   @unique
+  mention   Mention  @relation(fields: [discipline,diplome], references: [discipline,diplome])
+  discipline String
+  diplome String
+  @@id([annee,trec])
   Emoji Emoji[]
+ 
 }
 
 model Emoji {
-  code       String   @id @unique
+  code       String   @id 
   nom        String
   parcours   Parcours @relation(fields: [parcoursId], references: [role])
   parcoursId String
@@ -49,11 +58,12 @@ model Emoji {
 model GuildContainsMention {
   guild     Guild   @relation(fields: [guildId], references: [id])
   guildId   Int
-  mention   Mention @relation(fields: [diplome], references: [diplome])
+  mention   Mention @relation(fields: [discipline,diplome], references: [discipline,diplome])
+  discipline String
   diplome String
-  id        String  @unique
+  @@id([guildId,diplome])
 }
 model Config {
-  cle    String @unique @id
+  cle    String  @id
   valeur String
 }
