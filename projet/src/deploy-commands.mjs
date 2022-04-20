@@ -1,7 +1,7 @@
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { token, clientId, guildId } from "./config.mjs";
-import fs from 'fs';
+import fs, { cp } from 'fs';
 import path from 'path';
 
 const commands = [];
@@ -13,7 +13,9 @@ for (const file of commandFiles) {
 	//filePath = path.resolve('./src',`./slashCommands/${file}`);
 	
 	const command =  import(`./slashCommands/${file}`);
-	commands.push(command);
+	command.then(function(result){
+		commands.push(result);
+	});
 }
 
 const rest = new REST({ version: '9' }).setToken(token);
