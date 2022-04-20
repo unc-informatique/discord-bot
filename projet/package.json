@@ -13,6 +13,7 @@
     "scripts": {
         "start:dev": "cross-env NODE_ENV=development nodemon --inspect --signal SIGUSR2 src/main.mjs",
         "start:prod": "cross-env NODE_ENV=production node src/main.mjs",
+        "start:deploy-command": "cross-env NODE_ENV=development nodemon --inspect --signal SIGUSR2 src/deploy-commands.mjs",
         "lint": "eslint **/*.mjs",
         "format": "prettier --write **/*.{mjs,md}"
     },
@@ -20,11 +21,16 @@
         "schema": "./prisma/schema.prisma"
     },
     "dependencies": {
+        "@discordjs/builders": "^0.12.0",
+        "@discordjs/rest": "^0.3.0",
+        "cross-env": "^7.0.3",
+        "discord-api-types": "^0.27.2",
         "@prisma/client": "^3.12.0",
         "discord.js": "^13.6.0",
         "dotenv": "^16.0.0",
         "pino": "^7.8.0",
-        "prisma": "^3.11.1"
+        "prisma": "^3.11.1",
+        "pino-pretty": "^7.5.1"
     },
     "devDependencies": {
         "eslint": "^8.9.0",
@@ -35,6 +41,7 @@
         "eslint-plugin-security": "^1.4.0",
         "eslint-plugin-unicorn": "^41.0.0",
         "pino-pretty": "^7.5.1",
+        "nodemon": "^2.0.15",
         "prettier": "^2.5.1"
     }
 }
