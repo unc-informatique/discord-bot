@@ -1,36 +1,21 @@
-import { REST } from '@discordjs/rest';
-import { Routes } from 'discord-api-types/v9';
+import { REST } from "@discordjs/rest";
+import { Routes } from "discord-api-types/v9";
 import { token, clientId, guildId } from "./config.mjs";
-import fs, { cp } from 'fs';
-import path from 'path';
+import { SlashCommandBuilder } from "@discordjs/builders";
+import logger from "./logger.mjs";
 
-const commands = [];
-const dirPath = path.resolve('./src','./slashCommands');
-const commandFiles = fs.readdirSync(dirPath).filter(file => file.endsWith('.mjs'));
-
-var filePath;
-for (const file of commandFiles) {
-	//filePath = path.resolve('./src',`./slashCommands/${file}`);
-	
-	const command =  import(`./slashCommands/${file}`);
-	command.then(function(result){
-		commands.push(result);
-	});
-}
+const commands = [
+	new SlashCommandBuilder().setName("addmention").setDescription("Ajoute une mention en base de données!")
+    .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
+    .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
+  ].map((command) => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(token);
 
-(async () => {
-	try {
-		console.log('Started refreshing application (/) commands.');
-
-		await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
-			{ body: commands },
-		);
-
-		console.log('Successfully reloaded application (/) commands.');
-	} catch (error) {
-		console.error(error);
-	}
-})();
+try {
+	await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
+	logger.info("Successfully registered application commands.");
+  } catch (error) {
+	logger.error(error);
+  }
+  

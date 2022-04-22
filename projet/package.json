@@ -13,7 +13,7 @@
     "scripts": {
         "start:dev": "cross-env NODE_ENV=development nodemon --inspect --signal SIGUSR2 src/main.mjs",
         "start:prod": "cross-env NODE_ENV=production node src/main.mjs",
-        "start:deploy-command": "cross-env NODE_ENV=development nodemon --inspect --signal SIGUSR2 src/deploy-commands.mjs",
+        "start:deploy-command": "cross-env NODE_ENV=development node src/deploy-commands.mjs",
         "lint": "eslint **/*.mjs",
         "format": "prettier --write **/*.{mjs,md}"
     },
