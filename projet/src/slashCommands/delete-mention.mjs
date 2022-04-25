@@ -6,8 +6,8 @@ import logger from "../logger.mjs";
 
 export default {
   data:  new SlashCommandBuilder()
-    .setName("addmention")
-    .setDescription("Ajoute une mention en base de données!")
+    .setName("delete-mention")
+    .setDescription("Supprime une mention!")
     .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
     .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
   /**
@@ -20,18 +20,17 @@ export default {
       await prisma.$connect();
       const Discipline = interaction.options.getString("discipline");
       const Diplome = interaction.options.getString("diplome");
-      await prisma.mention.create({
-        data: {
-          discipline: Discipline,
-          diplome: Diplome,
+      await prisma.mention.delete({
+        where: {
+          discipline_diplome: {discipline : Discipline,diplome :Diplome}
         },
       });
     } catch (error) {
       logger.error(error, `Command handling error (${error.message})`);
-      return interaction.editReply('Une erreure est survenu dans le processus d ajout de votre mention en base de données');
+      return interaction.editReply({content:`Command handling error (${error.message})`,ephemeral:true});
     } finally {
       prisma.$disconnect();
     }
-    return interaction.editReply('Votre mention a bien été ajoutée.');
+    return interaction.editReply('Votre mention a bien été supprimée.');
   },
 };

@@ -18,10 +18,11 @@ const dirPath = path.resolve("./src", "./slashCommands");
 const commandFiles = fs.readdirSync(dirPath).filter((file) => file.endsWith(".mjs"));
 
 for (const file of commandFiles) {
+  // eslint-disable-next-line node/no-unsupported-features/es-syntax
   const command = import(`./slashCommands/${file}`);
-  command.then(function (result) {
-    client.commands.set(result.default.data.name,result);
-  });
+    command.then(function (result) {
+      client.commands.set(result.default.data.name,result);
+    });
 }
 
 // Log client error, but do not re-raise

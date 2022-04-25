@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/no-empty-file */
+/* eslint-disable unicorn/filename-case */
 //repertoire de toutes les commandes � faire.
 
 /**

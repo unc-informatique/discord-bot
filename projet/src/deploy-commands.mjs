@@ -5,9 +5,15 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import logger from "./logger.mjs";
 
 const commands = [
-	new SlashCommandBuilder().setName("addmention").setDescription("Ajoute une mention en base de données!")
+	new SlashCommandBuilder().setName("add-mention").setDescription("Ajoute une mention en base de données!")
     .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
     .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
+
+  new SlashCommandBuilder().setName("delete-mention").setDescription("Supprime une mention en base de données!")
+    .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
+    .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
+  
+    new SlashCommandBuilder().setName("print-mention").setDescription("affiche toutes les mentions")
   ].map((command) => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(token);
