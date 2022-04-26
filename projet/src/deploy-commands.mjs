@@ -13,7 +13,18 @@ const commands = [
     .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
     .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
   
-    new SlashCommandBuilder().setName("print-mention").setDescription("affiche toutes les mentions")
+  new SlashCommandBuilder().setName("print-mention").setDescription("affiche toutes les mentions"),
+
+  new SlashCommandBuilder().setName("add-parcours").setDescription("Ajoute un parcours!")
+    .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
+    .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true))
+    .addStringOption((option) => option.setName("annee").setDescription("ex: L1/L2/L3/L4").setRequired(true))
+    .addStringOption((option) => option.setName("trec").setDescription("ex: TREC5/TREC7").setRequired(true)),
+
+  new SlashCommandBuilder().setName("print-parcours").setDescription("affiches tous les parcours"),
+
+  new SlashCommandBuilder().setName("delete-parcours").setDescription("Supprime un parcours!")
+    .addStringOption((option) => option.setName("role").setDescription("ex: L4 TREC7 INFO").setRequired(true))
   ].map((command) => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(token);

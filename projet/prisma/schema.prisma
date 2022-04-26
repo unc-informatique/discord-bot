@@ -15,15 +15,15 @@ model Guild {
 
 model Channel {
   id      Int
-  guild   Guild     @relation(fields: [guildId], references: [id])
+  guild   Guild     @relation(fields: [guildId], references: [id], onDelete: Cascade)
   guildId Int
   @@id([id,guildId])
   Message Message[]
 }
 
 model Message {
-  id        Int     @id @unique
-  channel   Channel @relation(fields: [channelId,guildId], references: [id,guildId])
+  id        Int     @id 
+  channel   Channel @relation(fields: [channelId,guildId], references: [id,guildId], onDelete: Cascade)
   guildId Int
   channelId Int
 }
@@ -37,11 +37,13 @@ model Mention {
 }
 
 model Parcours {
-  annee     DateTime
+  annee     String
   trec      String
   role      String   @unique
-  mention   Mention  @relation(fields: [discipline,diplome], references: [discipline,diplome])
-  discipline String
+  edtLastModiified DateTime?
+  edtChemin String?
+  mention   Mention  @relation(fields: [discipline,diplome], references: [discipline,diplome], onDelete: Cascade)
+  discipline String 
   diplome String
   @@id([annee,trec])
   Emoji Emoji[]
@@ -51,14 +53,14 @@ model Parcours {
 model Emoji {
   code       String   @id 
   nom        String
-  parcours   Parcours @relation(fields: [parcoursId], references: [role])
+  parcours   Parcours @relation(fields: [parcoursId], references: [role], onDelete: Cascade)
   parcoursId String
 }
 
 model GuildContainsMention {
-  guild     Guild   @relation(fields: [guildId], references: [id])
+  guild     Guild   @relation(fields: [guildId], references: [id], onDelete: Cascade)
   guildId   Int
-  mention   Mention @relation(fields: [discipline,diplome], references: [discipline,diplome])
+  mention   Mention @relation(fields: [discipline,diplome], references: [discipline,diplome] ,onDelete: Cascade)
   discipline String
   diplome String
   @@id([guildId,diplome])

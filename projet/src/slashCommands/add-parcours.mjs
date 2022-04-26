@@ -6,10 +6,12 @@ import logger from "../logger.mjs";
 
 export default {
   data:  new SlashCommandBuilder()
-    .setName("delete-mention")
-    .setDescription("Supprime une mention!")
+    .setName("add-parcours")
+    .setDescription("Ajoute un parcours!")
     .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
-    .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
+    .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true))
+    .addStringOption((option) => option.setName("annee").setDescription("ex: L1/L2/L3/L4").setRequired(true))
+    .addStringOption((option) => option.setName("trec").setDescription("ex: TREC5/TREC7").setRequired(true)),
   /**
    * @param {CommandInteraction} interaction
    */
@@ -20,9 +22,15 @@ export default {
       await prisma.$connect();
       const Discipline = interaction.options.getString("discipline");
       const Diplome = interaction.options.getString("diplome");
-      await prisma.mention.delete({
-        where: {
-          discipline_diplome: {discipline : Discipline,diplome :Diplome}
+      const Annee = interaction.options.getString("annee");
+      const TREC = interaction.options.getString("trec");
+      await prisma.parcours.create({
+        data: {
+          discipline: Discipline,
+          diplome: Diplome,
+          annee: Annee,
+          trec: TREC,
+          role: Annee+' '+TREC+' '+Diplome.slice(0,4).toUpperCase()
         },
       });
     } catch (error) {
@@ -31,6 +39,6 @@ export default {
     } finally {
       prisma.$disconnect();
     }
-    return interaction.editReply('La mention a bien été supprimée.');
+    return interaction.editReply('Votre parcours a bien été ajoutée.');
   },
 };

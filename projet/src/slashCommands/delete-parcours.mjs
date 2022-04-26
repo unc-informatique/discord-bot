@@ -6,10 +6,9 @@ import logger from "../logger.mjs";
 
 export default {
   data:  new SlashCommandBuilder()
-    .setName("delete-mention")
-    .setDescription("Supprime une mention!")
-    .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
-    .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
+    .setName("delete-parcours")
+    .setDescription("Supprime un parcours!")
+    .addStringOption((option) => option.setName("role").setDescription("ex: L4 TREC7 INFO").setRequired(true)),
   /**
    * @param {CommandInteraction} interaction
    */
@@ -18,11 +17,10 @@ export default {
     const prisma = new PrismaClient();
     try {
       await prisma.$connect();
-      const Discipline = interaction.options.getString("discipline");
-      const Diplome = interaction.options.getString("diplome");
-      await prisma.mention.delete({
+      const Role = interaction.options.getString("role");
+      await prisma.parcours.delete({
         where: {
-          discipline_diplome: {discipline : Discipline,diplome :Diplome}
+          role: Role,
         },
       });
     } catch (error) {
@@ -31,6 +29,6 @@ export default {
     } finally {
       prisma.$disconnect();
     }
-    return interaction.editReply('La mention a bien été supprimée.');
+    return interaction.editReply('Le parcours a bien été supprimée.');
   },
 };
