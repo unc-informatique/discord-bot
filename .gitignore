@@ -60,3 +60,5 @@ jspm_packages/
 # Other
 package-lock.json
 .gitignore
+Test.js
+test.pdf
