@@ -9,6 +9,7 @@ import moment from "moment";
 import fs from "fs";
 import request from "request-promise-native"
 
+
 async function downloadPDF(pdfURL, outputFilename) {
     let pdfBuffer = await request.get({uri: pdfURL, encoding: null});
     // console.log("Writing downloaded PDF file to " + outputFilename + "...");
@@ -58,4 +59,4 @@ function downloadEdt(pdf_name, indices = null, plus = 0) {
   return url;
 }
 
-console.log(downloadEdt("test.pdf", [2201271126, 15404, 9]))
+// console.log(downloadEdt("test.pdf", [2201271126, 15404, 9]))
