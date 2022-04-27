@@ -1,9 +1,13 @@
+/*
 var moment = require('moment');
 //const { DownloaderHelper } = require('node-downloader-helper');
 
 const fs = require("fs");
 const request = require("request-promise-native");
-
+*/
+import moment from "moment";
+import fs from "fs";
+import request from "request-promise-native"
 
 async function downloadPDF(pdfURL, outputFilename) {
     let pdfBuffer = await request.get({uri: pdfURL, encoding: null});
