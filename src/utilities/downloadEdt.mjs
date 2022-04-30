@@ -7,12 +7,8 @@ async function downloadPDF(pdfURL, outputFilename) {
     let resp = await fetch(pdfURL);
     // if (!resp.ok) throw new Error("Unexpected response");
     let data = await resp.buffer();
-    /*let data = await resp.arrayBuffer();
-    for (const elem of data){
-        console.log(elem);
-    }*/
+    /*let data = await resp.arrayBuffer();*/
 
-    // console.log("Writing downloaded PDF file to " + outputFilename + "...");
     fs.writeFileSync(outputFilename, data);
 }
 
@@ -46,11 +42,6 @@ function downloadEdt(pdf_name, chiffres_magique, plus = 0) {
   url = "http://applis.univ-nc.nc/gedfs/edtweb2/" + chiffres_magique[0] + "." + (ch_magique) + "/PDF_EDT_" + chiffres_magique[1] + "_"+ (num_semaine + plus) +"_"+ year +".pdf";
   path_to_pdf = "edt/"+pdf_name;
 
-  /*
-  const download = new DownloaderHelper(url, __dirname);
-  download.on('end', () => console.log('Download Completed'))
-  download.start();
-  */
   downloadPDF(url, pdf_name);
 
   return url;
