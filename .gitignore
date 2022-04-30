@@ -6,6 +6,7 @@ demos/
 
 # desactivation du package-lock
 package-lock.json
+yarn.lock
 
 # base de .gitignore de github pour les projets Node.js
 # Logs
