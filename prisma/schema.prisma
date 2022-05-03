@@ -46,15 +46,8 @@ model Parcours {
   discipline String 
   diplome String
   @@id([annee,trec])
-  Emoji Emoji[]
+  emoji     String @unique
  
-}
-
-model Emoji {
-  code       String   @id 
-  nom        String
-  parcours   Parcours @relation(fields: [parcoursId], references: [role], onDelete: Cascade)
-  parcoursId String
 }
 
 model GuildContainsMention {

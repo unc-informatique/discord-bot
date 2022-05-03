@@ -37,17 +37,9 @@ CREATE TABLE "Parcours" (
     "edtChemin" TEXT,
     "discipline" TEXT NOT NULL,
     "diplome" TEXT NOT NULL,
-
+    "emoji" TEXT NOT NULL,
     PRIMARY KEY ("annee", "trec"),
     CONSTRAINT "Parcours_discipline_diplome_fkey" FOREIGN KEY ("discipline", "diplome") REFERENCES "Mention" ("discipline", "diplome") ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- CreateTable
-CREATE TABLE "Emoji" (
-    "code" TEXT NOT NULL PRIMARY KEY,
-    "nom" TEXT NOT NULL,
-    "parcoursId" TEXT NOT NULL,
-    CONSTRAINT "Emoji_parcoursId_fkey" FOREIGN KEY ("parcoursId") REFERENCES "Parcours" ("role") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -69,3 +61,7 @@ CREATE TABLE "Config" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Parcours_role_key" ON "Parcours"("role");
+CREATE UNIQUE INDEX "Parcours_Emoji_key" ON "Parcours"("emoji");
+
+PRAGMA foreign_key_check;
+PRAGMA foreign_keys=ON;
