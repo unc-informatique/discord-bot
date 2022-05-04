@@ -1,4 +1,5 @@
 import moment from "moment";
+import patate from "./getConvenientWeek.mjs";
 
 
 function getHeader(chiffres_magique, plus=0){
@@ -32,5 +33,5 @@ function getHeader(chiffres_magique, plus=0){
 
     return ;
 }
-
+console.log(patate());
 // console.log(getHeader([ '2202041315', '16482', 14 ]));

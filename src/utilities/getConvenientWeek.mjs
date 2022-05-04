@@ -1,7 +1,6 @@
 import moment from "moment";
 
-
-function getIsoDateWeek(){
+function getConvenientWeek(){
     let date_time = new Date();
 
     let day = date_time.getDate();
@@ -22,3 +21,5 @@ function getIsoDateWeek(){
 
 
 //console.log(getIsoDateWeek());
+
+export default getConvenientWeek;

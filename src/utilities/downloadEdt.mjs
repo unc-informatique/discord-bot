@@ -1,6 +1,7 @@
 import moment from "moment";
 import fs from "fs";
 import fetch from "node-fetch";
+import getConvenientWeek from "./getConvenientWeek.mjs";
 
 
 async function downloadPDF(pdfURL, outputFilename) {
@@ -19,19 +20,9 @@ function downloadEdt(pdf_name, chiffres_magique, plus = 0) {
   //let ts = Date.now();
 
   let date_time = new Date();
-
-  let day = date_time.getDate();
-  let month = date_time.getMonth() + 1;
   let year = date_time.getFullYear();
 
-  current_date = moment(day+"-"+month+"-"+year, "DD-MM-YYYY");
-
-  num_semaine = current_date.week()-1;
-  let num_day = current_date.day();
-
-  if (num_day > 5) {
-    num_semaine += 1;
-  }
+  num_semaine = getConvenientWeek();
 
   while (num_semaine - chiffres_magique[2] < 0) {
     num_semaine += 1;
@@ -47,4 +38,4 @@ function downloadEdt(pdf_name, chiffres_magique, plus = 0) {
   return url;
 }
 
-console.log(downloadEdt("test.pdf", [2201271126, 15404, 9]))
+// console.log(downloadEdt("test.pdf", [2201271126, 15404, 9]));
