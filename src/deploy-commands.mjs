@@ -12,7 +12,7 @@ const commands = [
   new SlashCommandBuilder().setName("delete-mention").setDescription("Supprime une mention en base de données!")
     .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
     .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
-  
+
   new SlashCommandBuilder().setName("print-mention").setDescription("affiche toutes les mentions"),
 
   new SlashCommandBuilder().setName("add-parcours").setDescription("Ajoute un parcours!")
@@ -35,4 +35,3 @@ try {
   } catch (error) {
 	logger.error(error);
   }
-  
