@@ -1,5 +1,5 @@
 import moment from "moment";
-import getConvenientWeek from "./getConvenientWeek.mjs";
+import getConvenientWeek from "./get-convenient-week.mjs";
 
 
 function convertUrlToMagic(url) {
