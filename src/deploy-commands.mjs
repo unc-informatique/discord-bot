@@ -24,7 +24,16 @@ const commands = [
   new SlashCommandBuilder().setName("print-parcours").setDescription("affiches tous les parcours"),
 
   new SlashCommandBuilder().setName("delete-parcours").setDescription("Supprime un parcours!")
-    .addStringOption((option) => option.setName("role").setDescription("ex: L4 TREC7 INFO").setRequired(true))
+    .addStringOption((option) => option.setName("role").setDescription("ex: L4 TREC7 INFO").setRequired(true)),
+
+  new SlashCommandBuilder().setName("send-role-message").setDescription("Envoie un message pour claim son rôle en fonction d'un emoji")
+    .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
+    .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true)),
+
+  new SlashCommandBuilder().setName("add-emoji").setDescription("Ajoute un emoji à un parcours!")
+    .addStringOption((option) => option.setName("role").setDescription("ex: L4 INFO TREC7").setRequired(true))
+    .addStringOption((option) => option.setName("emoji").setDescription("ex: dog").setRequired(true)),
+
   ].map((command) => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(token);
