@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, Role } from "discord.js";
 import pkg from "@prisma/client";
-import logger from "../logger.mjs";
+import { connexion } from "../utilities/connexion-bdd.mjs";
 
 
 export default {
@@ -16,24 +16,18 @@ export default {
   async execute(interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
-    try {
+    return connexion(prisma,interaction,'Votre emoji a bien été ajouter/mise à jour.',async function foo(){
       await prisma.$connect();
-      const Role = interaction.options.getString("role");
-      const Emoji = interaction.options.getString("emoji");
-      await prisma.parcours.update({
-        where: {
-          role: Role,
-        },
-        data: {
-            emoji:Emoji,
-        },
-      });
-    } catch (error) {
-      logger.error(error, `Command handling error (${error.message})`);
-      return interaction.editReply({content:`Command handling error (${error.message})`,ephemeral:true});
-    } finally {
-      prisma.$disconnect();
-    }
-    return interaction.editReply('Votre emoji a bien été ajouter/mise à jour.');
+            const Role = interaction.options.getString("role");
+            const Emoji = interaction.options.getString("emoji");
+            await prisma.parcours.update({
+              where: {
+                role: Role,
+              },
+              data: {
+                  emoji:Emoji,
+              },
+            });
+    });
   },
 };

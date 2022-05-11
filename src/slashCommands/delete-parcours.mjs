@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import pkg from "@prisma/client";
 import logger from "../logger.mjs";
+import { connexion } from "../utilities/connexion-bdd.mjs";
 
 
 export default {
@@ -15,7 +16,7 @@ export default {
   async execute(interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
-    try {
+    return connexion(prisma, interaction, 'Le parcours a bien été supprimée.', async function foo(){
       await prisma.$connect();
       const Role = interaction.options.getString("role");
       await prisma.parcours.delete({
@@ -23,12 +24,6 @@ export default {
           role: Role,
         },
       });
-    } catch (error) {
-      logger.error(error, `Command handling error (${error.message})`);
-      return interaction.editReply({content:`Command handling error (${error.message})`,ephemeral:true});
-    } finally {
-      prisma.$disconnect();
-    }
-    return interaction.editReply('Le parcours a bien été supprimée.');
+    });
   },
 };

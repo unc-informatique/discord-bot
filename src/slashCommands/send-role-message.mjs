@@ -34,7 +34,7 @@ export default {
       });
       for(const key in parcours){
           const emoji = parcours[key].emoji;
-          reactions.push(interaction.client.emojis.resolveId("dog face"));
+          reactions.push(interaction.guild.emojis.resolveId("dog face"));
           
           const role = parcours[key].role;
           messageText += `:${emoji}: = ${role}\n `;
@@ -46,6 +46,6 @@ export default {
       prisma.$disconnect();
     }
     const message = await interaction.editReply(messageText);
-    return message.react("🐶");
+    return message.react(reactions);
   },
 };
