@@ -24,5 +24,4 @@ function craftUrl(magic_parameters, offset = 0) {
     return url;
 }
 
-// console.log(craftUrl([12345, 125, 2]))
 export default craftUrl;

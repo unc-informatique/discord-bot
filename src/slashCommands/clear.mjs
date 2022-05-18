@@ -18,11 +18,8 @@ export default {
       //action ici
       let i = 0;
       while (i < Nombre){
-          if (true) {
-
-              i++;
-          }
-
+          channel.fetchMessage(lastmsg).then(msg => msg.delete());
+          i++;
       }
 
     } catch (error) {

@@ -1,6 +1,6 @@
 /* eslint-disable node/no-extraneous-import */
 // import moment from "moment";
-import fs from "fs";
+import fs from "node:fs";
 import fetch from "node-fetch";
 import craftUrl from "./craft-url.mjs";
 
@@ -22,18 +22,13 @@ async function downloadPDF(pdfURL, outputFilename) {;
 };
 
 
-function downloadEdt(pdf_name, chiffres_magique, plus = 0) {
-  let path_to_pdf, url;
+function downloadEdt(path_to_pdf, chiffres_magique, plus = 0) {
+  let url = craftUrl(chiffres_magique, plus);
 
-  url = craftUrl(chiffres_magique, plus);
-
-  path_to_pdf = "edt/"+pdf_name;
-
-  downloadPDF(url, pdf_name);
+  downloadPDF(url, path_to_pdf);
 
   return path_to_pdf;
 }
 
 
-// console.log(downloadEdt("test.pdf", [2201271126, 15404, 9]));
 export default downloadEdt;
