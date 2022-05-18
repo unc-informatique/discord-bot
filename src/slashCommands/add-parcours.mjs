@@ -2,10 +2,10 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import pkg from "@prisma/client";
 import logger from "../logger.mjs";
-
+import { connexion } from "../utilities/connexion-bdd.mjs";
 
 export default {
-  data:  new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("add-parcours")
     .setDescription("Ajoute un parcours!")
     .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
@@ -19,8 +19,7 @@ export default {
   async execute(interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
-    try {
-      await prisma.$connect();
+    return connexion(prisma, interaction, "Votre parcours a bien été ajoutée.", async function foo() {
       const Discipline = interaction.options.getString("discipline");
       const Diplome = interaction.options.getString("diplome");
       const Annee = interaction.options.getString("annee");
@@ -32,16 +31,10 @@ export default {
           diplome: Diplome,
           annee: Annee,
           trec: TREC,
-          role: Annee+' '+TREC+' '+Diplome.slice(0,4).toUpperCase(),
-          emoji: Emoji
+          role: Annee + " " + TREC + " " + Diplome.slice(0, 4).toUpperCase(),
+          emoji: Emoji,
         },
       });
-    } catch (error) {
-      logger.error(error, `Command handling error (${error.message})`);
-      return interaction.editReply({content:`Command handling error (${error.message})`,ephemeral:true});
-    } finally {
-      prisma.$disconnect();
-    }
-    return interaction.editReply('Votre parcours a bien été ajoutée.');
+    });
   },
 };

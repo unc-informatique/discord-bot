@@ -1,8 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import pkg from "@prisma/client";
-import logger from "../logger.mjs";
-
+import {connexion} from "../utilities/connexion-bdd.mjs";
 
 export default {
   data:  new SlashCommandBuilder()
@@ -16,7 +15,7 @@ export default {
   async execute(interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
-    try {
+    return connexion(prisma,interaction,"Votre mention a bien été supprimer.",async function foo(){
       await prisma.$connect();
       const Discipline = interaction.options.getString("discipline");
       const Diplome = interaction.options.getString("diplome");
@@ -25,12 +24,6 @@ export default {
           discipline_diplome: {discipline : Discipline,diplome :Diplome}
         },
       });
-    } catch (error) {
-      logger.error(error, `Command handling error (${error.message})`);
-      return interaction.editReply({content:`Command handling error (${error.message})`,ephemeral:true});
-    } finally {
-      prisma.$disconnect();
-    }
-    return interaction.editReply('La mention a bien été supprimée.');
+    });
   },
 };

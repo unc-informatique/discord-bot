@@ -1,5 +1,5 @@
 import { token } from "./config.mjs";
-import fs from "fs";
+import fs from "node:fs";
 import { Client, Collection ,Intents } from 'discord.js';
 import path from 'node:path';
 import process from "node:process";
@@ -14,8 +14,8 @@ import logger from "./logger.mjs";
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.commands = new Collection();
-const dirPath = path.resolve("./src", "./slashCommands");
-const commandFiles = fs.readdirSync(dirPath).filter((file) => file.endsWith(".mjs"));
+const directoryPath = path.resolve("./src", "./slashCommands");
+const commandFiles = fs.readdirSync(directoryPath).filter((file) => file.endsWith(".mjs"));
 
 for (const file of commandFiles) {
   // eslint-disable-next-line node/no-unsupported-features/es-syntax

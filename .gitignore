@@ -2,7 +2,7 @@
 backup/
 server/
 legacy/
-
+.vs/
 # base de .gitignore de github pour les projets Node.js
 # Logs
 logs
