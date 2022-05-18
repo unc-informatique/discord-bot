@@ -16,3 +16,15 @@ export function connexion(prisma, interaction, messageReponse, foo){
     }
       return interaction.editReply(messageReponse);
     };
+export async function connexionPrint(prisma, interaction, messageReponse, foo){
+  let result;
+  try {
+    result = await foo();
+  } catch (error) {
+    logger.error(error, `Command handling error (${error.message})`);
+    return interaction.editReply({content:`Command handling error (${error.message})`,ephemeral:true});
+  } finally {
+    prisma.$disconnect();
+  }
+    return interaction.editReply(JSON.stringify(result));
+  };

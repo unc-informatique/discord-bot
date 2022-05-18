@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction } from "discord.js";
+import { Client, CommandInteraction } from "discord.js";
 import pkg from "@prisma/client";
 import logger from "../logger.mjs";
 
@@ -17,6 +17,7 @@ export default {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
     const reactions = [];
+    const getEmoji = EmojiName => interaction.guild.emojis.cache.find(emoji => emoji.name === EmojiName);
     let messageText = "Choisissez votre rôle sur ce serveur en réagissant à ce message avec l'emoji de votre promotion dans la liste ci-dessous.\n";
     try {
       await prisma.$connect();
@@ -33,8 +34,8 @@ export default {
         }
       });
       for(const key in parcours){
-          const emoji = parcours[key].emoji;
-          reactions.push(interaction.guild.emojis.resolveId("dog face"));
+          const emoji = getEmoji(parcours[key].emoji);
+          reactions.push(emoji);
           
           const role = parcours[key].role;
           messageText += `:${emoji}: = ${role}\n `;

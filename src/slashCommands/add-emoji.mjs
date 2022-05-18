@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, Role } from "discord.js";
 import pkg from "@prisma/client";
 import { connexion } from "../utilities/connexion-bdd.mjs";
 
