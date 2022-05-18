@@ -24,6 +24,12 @@ const commands = [
 
   new SlashCommandBuilder().setName("print-parcours").setDescription("affiches tous les parcours"),
 
+  new SlashCommandBuilder().setName("clear").setDescription("Supprime N messages")
+  .addIntOption((option) => option.setName("nombre").setDescription("ex: 5").setRequired(true)),
+
+  new SlashCommandBuilder().setName("clear-date").setDescription("Supprime les messages a partir de la date donnée")
+  .addStringOption((option) => option.setName("date").setDescription("ex: 01-01-2022").setRequired(true)),
+
   new SlashCommandBuilder().setName("delete-parcours").setDescription("Supprime un parcours!")
     .addStringOption((option) => option.setName("role").setDescription("ex: L4 TREC7 INFO").setRequired(true)),
 

@@ -1,14 +1,17 @@
-import moment from "moment";
+// import moment from "moment";
 import getConvenientWeek from "./get-convenient-week.mjs";
+import logger from "../logger.mjs";
 
 
 function convertUrlToMagic(url) {
-  let current_date, num_semaine;
+  let number_semaine;
 
   let check_valid = url.split("/").includes("edtweb2");
+
   if (!check_valid){
       return
   }
+
   let explode = url.split("/");
   explode = explode.splice(explode.indexOf('edtweb2'), 3).splice(1, 2);
 
@@ -18,18 +21,22 @@ function convertUrlToMagic(url) {
   let chiff_magic1 = part1[0];
   let chiff_magic2 = part2[0];
 
-  let chiffre_temporaire = part2[1];
   let resultat_attendu = part1[1];
+  let chiffre_temporaire = part2[1];
 
-  num_semaine = getConvenientWeek();;
+  number_semaine = getConvenientWeek();
 
-  if (num_semaine - chiffre_temporaire < 0){
-      console.log("Impossible");
-      return
+  if (number_semaine - chiffre_temporaire < 0){
+      logger.error(
+          `week_number = ${number_semaine}; delta_week = ${chiffre_temporaire}; ${number_semaine - chiffre_temporaire} < 0`,
+      );
+      throw new Error(`week_number = ${number_semaine}; delta_week = ${chiffre_temporaire}; ${number_semaine - chiffre_temporaire} < 0`);
   }
+
   let chiff_magic3 = chiffre_temporaire - resultat_attendu;
 
   let chiffres_magique = [chiff_magic1, chiff_magic2, chiff_magic3];
+
   return chiffres_magique;
 }
 

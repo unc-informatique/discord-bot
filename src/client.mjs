@@ -1,7 +1,7 @@
 import { token } from "./config.mjs";
 import fs from "fs";
 import { Client, Collection ,Intents } from 'discord.js';
-import path from 'path';
+import path from 'node:path';
 import process from "node:process";
 import events from "node:events";
 import logger from "./logger.mjs";

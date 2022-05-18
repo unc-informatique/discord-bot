@@ -14,7 +14,4 @@ function getConvenientWeek(){
     return week_number;
 }
 
-
-// console.log(getConvenientWeek());
-
 export default getConvenientWeek;

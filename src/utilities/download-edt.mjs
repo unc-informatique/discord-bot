@@ -1,11 +1,20 @@
-import moment from "moment";
+/* eslint-disable node/no-extraneous-import */
+// import moment from "moment";
 import fs from "fs";
 import fetch from "node-fetch";
 import craftUrl from "./craft-url.mjs";
 
 async function downloadPDF(pdfURL, outputFilename) {;
     let resp = await fetch(pdfURL);
-    // if (!resp.ok) throw new Error("Unexpected response");
+    
+    if (!resp.ok){
+      throw new Error("Unexpected response! Not a PDF!");
+    }
+
+    if (!resp.headers['Content-Type'] == "application/pdf"){
+      throw new Error("Unexpected response! Not a PDF!");
+    }
+  
     let data = await resp.buffer();
     /*let data = await resp.arrayBuffer();*/
 
