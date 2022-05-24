@@ -46,7 +46,7 @@ model Parcours {
   discipline String 
   diplome String
   @@id([annee,trec])
-  emoji     String @unique
+  emoji     String
  
 }
 

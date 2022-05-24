@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { Client, CommandInteraction } from "discord.js";
 import pkg from "@prisma/client";
 import logger from "../logger.mjs";
-
+import { clientId } from "../config.mjs";
 
 export default {
   data:  new SlashCommandBuilder()
@@ -13,12 +13,12 @@ export default {
   /**
    * @param {CommandInteraction} interaction
    */
-   async execute(interaction) {
+   async execute(client,interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
     const reactions = [];
-    const getEmoji = EmojiName => interaction.guild.emojis.cache.find(emoji => emoji.name === EmojiName);
-    let messageText = "Choisissez votre rôle sur ce serveur en réagissant à ce message avec l'emoji de votre promotion dans la liste ci-dessous.\n";
+    const emojiToRole = {};
+    let messageText = "Choisissez votre rôle sur ce serveur en réagissant à ce message avec l'emoji de votre promotion.\n";
     try {
       await prisma.$connect();
       const Discipline = interaction.options.getString("discipline");
@@ -34,19 +34,65 @@ export default {
         }
       });
       for(const key in parcours){
-          const emoji = getEmoji(parcours[key].emoji);
+          const emoji = (parcours[key].emoji).replace(/\s+/g, '');
           reactions.push(emoji);
-          
+        
           const role = parcours[key].role;
-          messageText += `:${emoji}: = ${role}\n `;
-      }
+          messageText += `${emoji} = ${role}\n `;
+
+          // eslint-disable-next-line security/detect-object-injection
+          emojiToRole[emoji] = role;
+        }
     } catch (error) {
       logger.error(error, `Command handling error (${error.message})`);
       return interaction.editReply({content:`Command handling error (${error.message})`,ephemeral:true});
     } finally {
       prisma.$disconnect();
     }
-    const message = await interaction.editReply(messageText);
-    return message.react(reactions);
+    
+    const message = await interaction.editReply({content: messageText, fetchReply: true });
+    //ajout des réactions en dessous du messages
+    for(const emoji of reactions){
+      message.react(emoji);
+    }
+
+    const handleReaction = (reaction, user, add) => {
+      if(user.id === clientId){
+        return
+      }
+      //récupération de l'emoji dans le message
+      const emoji = reaction._emoji;
+
+      //récupération de la guild
+      const { guild } = reaction.message;
+      
+      //récupération du nom du role a partir de l'emoji
+      const roleName = emojiToRole[emoji];
+
+      if(!roleName) {
+        return
+      }
+      
+      //récupération du role
+      const role = guild.roles.cache.find(role => role.name === roleName);
+      //récupération du membre
+      const member = guild.members.cache.find(member => member.id === user.id);
+      
+      if(add) {
+        member.roles.add(role);
+      }else{
+        member.roles.remove(role);
+      }
+    }
+
+    client.on('messageReactionAdd',(reaction, user) => {;
+      if(reaction.message.channel.id === interaction.channelId){
+        handleReaction(reaction,user,true);
+      }
+    });
+    
+    client.on('messageReactionRemove',(reaction, user) => {
+      handleReaction(reaction,user,false);
+    });
   },
 };

@@ -11,7 +11,7 @@ import logger from "./logger.mjs";
 // Create a new client instance.
 // Global module variable/singleton
 // https://discordjs.guide/creating-your-bot/#creating-the-main-file
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
 
 client.commands = new Collection();
 const directoryPath = path.resolve("./src", "./slashCommands");
@@ -40,7 +40,7 @@ client.on('interactionCreate', async interaction => {
 
 	try {
     await interaction.deferReply();
-		await command.default.execute(interaction);
+		await command.default.execute(client,interaction);
 	} catch (error) {
 		console.error(error);
 		await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true });

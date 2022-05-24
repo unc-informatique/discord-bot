@@ -61,7 +61,6 @@ CREATE TABLE "Config" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Parcours_role_key" ON "Parcours"("role");
-CREATE UNIQUE INDEX "Parcours_emoji_key" ON "Parcours"("emoji");
 
 PRAGMA foreign_key_check;
 PRAGMA foreign_keys=ON;

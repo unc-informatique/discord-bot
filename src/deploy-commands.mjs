@@ -19,12 +19,13 @@ const commands = [
     .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
     .addStringOption((option) => option.setName("diplome").setDescription("ex: Informatique").setRequired(true))
     .addStringOption((option) => option.setName("annee").setDescription("ex: L1/L2/L3/L4").setRequired(true))
-    .addStringOption((option) => option.setName("trec").setDescription("ex: TREC5/TREC7").setRequired(true)),
+    .addStringOption((option) => option.setName("trec").setDescription("ex: TREC5/TREC7").setRequired(true))
+    .addStringOption((option) => option.setName("emoji").setDescription("ex: dog").setRequired(true)),
 
   new SlashCommandBuilder().setName("print-parcours").setDescription("affiches tous les parcours"),
 
   new SlashCommandBuilder().setName("clear").setDescription("Supprime N messages")
-  .addIntOption((option) => option.setName("nombre").setDescription("ex: 5").setRequired(true)),
+  .addIntegerOption((option) => option.setName("nombre").setDescription("ex: 5").setRequired(true)),
 
   new SlashCommandBuilder().setName("clear-date").setDescription("Supprime les messages a partir de la date donnée")
   .addStringOption((option) => option.setName("date").setDescription("ex: 01-01-2022").setRequired(true)),

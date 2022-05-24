@@ -5,7 +5,7 @@ import logger from "../logger.mjs";
 import { connexion } from "../utilities/connexion-bdd.mjs";
 
 export default {
-  data:  new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("add-mention")
     .setDescription("Ajoute une mention!")
     .addStringOption((option) => option.setName("discipline").setDescription("ex: Science").setRequired(true))
@@ -16,7 +16,7 @@ export default {
   async execute(interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
-    return connexion(prisma,interaction,'Votre mention a bien été ajoutée.',async function foo(){
+    return connexion(prisma, interaction, "Votre mention a bien été ajoutée.", async function foo() {
       await prisma.$connect();
       const Discipline = interaction.options.getString("discipline");
       const Diplome = interaction.options.getString("diplome");
@@ -25,7 +25,7 @@ export default {
           discipline: Discipline,
           diplome: Diplome,
         },
-      }); 
-    })
+      });
+    });
   },
 };
