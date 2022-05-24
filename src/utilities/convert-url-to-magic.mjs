@@ -1,4 +1,3 @@
-// import moment from "moment";
 import getConvenientWeek from "./get-convenient-week.mjs";
 import logger from "../logger.mjs";
 
@@ -26,12 +25,15 @@ function convertUrlToMagic(url) {
 
   number_semaine = getConvenientWeek();
 
+  
   if (number_semaine - chiffre_temporaire < 0){
+
       logger.error(
           `week_number = ${number_semaine}; delta_week = ${chiffre_temporaire}; ${number_semaine - chiffre_temporaire} < 0`,
       );
       throw new Error(`week_number = ${number_semaine}; delta_week = ${chiffre_temporaire}; ${number_semaine - chiffre_temporaire} < 0`);
   }
+   
 
   let chiff_magic3 = chiffre_temporaire - resultat_attendu;
 
