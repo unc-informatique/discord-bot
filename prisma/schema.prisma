@@ -8,8 +8,8 @@ generator client {
 }
 
 model Guild {
-  id       Int        @id
-  Channel  Channel[]
+  id                   Int                    @id
+  Channel              Channel[]
   GuildContainsMention GuildContainsMention[]
 }
 
@@ -17,48 +17,61 @@ model Channel {
   id      Int
   guild   Guild     @relation(fields: [guildId], references: [id], onDelete: Cascade)
   guildId Int
-  @@id([id,guildId])
   Message Message[]
+
+  @@id([id, guildId])
 }
 
 model Message {
-  id        Int     @id 
-  channel   Channel @relation(fields: [channelId,guildId], references: [id,guildId], onDelete: Cascade)
-  guildId Int
+  id        Int     @id
+  channel   Channel @relation(fields: [channelId, guildId], references: [id, guildId], onDelete: Cascade)
+  guildId   Int
   channelId Int
 }
 
 model Mention {
-  discipline String
-  diplome    String
-  @@id([discipline,diplome])
-  Parcours   Parcours[]
-  GuildContainsMention   GuildContainsMention[]
+  discipline           String
+  diplome              String
+  Parcours             Parcours[]
+  GuildContainsMention GuildContainsMention[]
+
+  @@id([discipline, diplome])
 }
 
 model Parcours {
-  annee     String
-  trec      String
-  role      String   @unique
+  annee            String
+  trec             String
+  role             String    @unique
   edtLastModiified DateTime?
-  edtChemin String?
-  mention   Mention  @relation(fields: [discipline,diplome], references: [discipline,diplome], onDelete: Cascade)
-  discipline String 
-  diplome String
-  @@id([annee,trec])
-  emoji     String
- 
+  edtChemin        String?
+  mention          Mention   @relation(fields: [discipline, diplome], references: [discipline, diplome], onDelete: Cascade)
+  discipline       String
+  diplome          String
+  emoji            String
+
+  Semestre Semestre[]
+  @@id([annee, trec])
+}
+
+model Semestre {
+  nombre1  Int
+  nombre2  Int
+  date     Int
+  parcours Parcours @relation(fields: [role], references: [role], onDelete: Cascade)
+  role     String @id
 }
 
 model GuildContainsMention {
-  guild     Guild   @relation(fields: [guildId], references: [id], onDelete: Cascade)
-  guildId   Int
-  mention   Mention @relation(fields: [discipline,diplome], references: [discipline,diplome] ,onDelete: Cascade)
+  guild      Guild   @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guildId    Int
+  mention    Mention @relation(fields: [discipline, diplome], references: [discipline, diplome], onDelete: Cascade)
   discipline String
-  diplome String
-  @@id([guildId,diplome])
+  diplome    String
+
+  @@id([guildId, diplome])
 }
+
 model Config {
-  cle    String  @id
+  cle    String @id
   valeur String
 }

@@ -43,6 +43,15 @@ CREATE TABLE "Parcours" (
 );
 
 -- CreateTable
+CREATE TABLE "Semestre" (
+    "nombre1" INTEGER NOT NULL,
+    "nombre2" INTEGER NOT NULL,
+    "date" INTEGER NOT NULL,
+    "role" TEXT NOT NULL PRIMARY KEY,
+    CONSTRAINT "Semestre_role_fkey" FOREIGN KEY ("role") REFERENCES "Parcours" ("role") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
 CREATE TABLE "GuildContainsMention" (
     "guildId" INTEGER NOT NULL,
     "discipline" TEXT NOT NULL,
