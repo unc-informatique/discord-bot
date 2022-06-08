@@ -65,7 +65,7 @@ Liste spéculative à consolider, reprises en tout ou partie du `ClassBot`.
 - [x] commandes `ping`, `uptime` et `version`
 - [x] être capable de gérer plusieurs formations
 - [x] message de bienvenue
-- [ ] gestion des rôles
+- [X] gestion des rôles
   - [x] _reaction roles_ pour chaque promo de licence
   - [ ] remise à 0 des rôles
   - [ ] audit des rôles (étudiants qui n'en endossent pas exactement 1)
@@ -78,14 +78,14 @@ Liste spéculative à consolider, reprises en tout ou partie du `ClassBot`.
 - [ ] contacts admin ?
 - [ ] Vérification de s'il y a un nouvel emploi du temps
   - peut être une vérification en binaire
-- [ ] Récupération de l'emploi du temps avec convertissement du pdf en image
-  - [ ] possibilité de mise en cache
+- [X] Récupération de l'emploi du temps avec convertissement du pdf en image
+  - [X] possibilité de mise en cache
 - [ ] Commandes
   - [ ] Affichage d'un emploi du temps en fonction du role de l'utilisateur
-  - [ ] Suppression des messages plus anciens qu'une date X
-  - [ ] Laison d'un emoji à un rôle sur un message
+  - [X] Suppression des messages plus anciens qu'une date X
+  - [X] Laison d'un emoji à un rôle sur un message
   - [ ] Désactivation de la mise à jour/vérification des emplois du temps
-- [ ] Vérification des permissions des utilisateurs pour l'utilisation du bot
+- [X] Vérification des permissions des utilisateurs pour l'utilisation du bot
 - [ ] sondage
   - un utilisateur peut crée un message qui fera office de sondage avec des reactions pour les choix des utilisateurs.
 
