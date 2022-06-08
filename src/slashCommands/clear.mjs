@@ -11,7 +11,7 @@ export default {
   /**
    * @param {CommandInteraction} interaction
    */
-  async execute(interaction) {
+  async execute(client,interaction) {
     try {
       const Nombre = interaction.options.getInt("nombre");
 

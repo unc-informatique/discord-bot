@@ -16,7 +16,7 @@ export default {
   /**
    * @param {CommandInteraction} interaction
    */
-  async execute(interaction) {
+  async execute(client,interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
     return connexion(prisma, interaction, "Votre parcours a bien été ajoutée.", async function foo() {

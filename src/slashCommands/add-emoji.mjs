@@ -12,7 +12,7 @@ export default {
   /**
    * @param {CommandInteraction} interaction
    */
-  async execute(interaction) {
+  async execute(client,interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
     return connexion(prisma, interaction, "Votre emoji a bien été ajouter/mise à jour.", async function foo() {

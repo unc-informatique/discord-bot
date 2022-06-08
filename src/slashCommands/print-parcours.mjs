@@ -9,7 +9,7 @@ export default {
   /**
    * @param {CommandInteraction} interaction
    */
-  async execute(interaction) {
+  async execute(client,interaction) {
     const { PrismaClient } = pkg;
     const prisma = new PrismaClient();
     return connexionPrint(prisma, interaction, "", async function foo() {
